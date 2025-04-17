@@ -17,7 +17,9 @@
 ### 2.2. headless mode 
 
 - all
+
 ```npx cypress run```
 
 - specific file
+
 ```npx cypress run --spec "cypress/e2e/navigation.cy.js"```
