@@ -28,29 +28,28 @@ describe('contact form', () => {
             expect(el).to.not.have.attr('disabled');
             expect(el.text()).to.not.equal('Sending...');
         })
-        cy.get('@submitBtn').contains('Send Message')
+        cy.get('@submitBtn').contains('Send Message');
 
         cy.get('[data-cy="contact-input-message"]').as('msgInput')
         cy.get('@msgInput').blur(); //lose focus
         cy.get('@msgInput')
             .parent()
-            .then(el => {
-                expect(el.attr('class')).to.contains('invalid');
-            });
+            .should('have.attr', 'class')
+            .and('match', /invalid/); // or .and('eq', 'invalid')
 
         cy.get('[data-cy="contact-input-name"]').as('nameInput')
         cy.get('@nameInput').focus().blur(); //lose focus
         cy.get('@nameInput')
             .parent()
-            .then(el => {
-                expect(el.attr('class')).to.contains('invalid');
-            });
+            .should('have.attr', 'class')
+            .and('match', /invalid/); 
         
         cy.get('[data-cy="contact-input-email"]').as('emailInput')
         cy.get('@emailInput').focus().blur(); //lose focus
         cy.get('@emailInput')
             .parent()
-            .then(el => {
+            .should((el) => {
+                expect(el.attr('class')).not.to.be.undefined;
                 expect(el.attr('class')).to.contains('invalid');
             });
     });
