@@ -21,7 +21,7 @@ describe('contact form', () => {
 
     it('should submit the form', () => {
         
-        cy.get('[data-cy="contact-input-message"]').type('Hello');
+        cy.getById('contact-input-message').type('Hello');
         cy.get('[data-cy="contact-input-name"]').type('John Doe');
         cy.get('[data-cy="contact-btn-submit"]').then((el) => {
             expect(el.attr('disabled')).to.be.undefined;
