@@ -2,7 +2,7 @@
 
 describe('contact form', () => {
     it('should submit the form', () => {
-        cy.visit('http://localhost:5173/about');
+        cy.visit('/about');
         cy.get('[data-cy="contact-input-message"]').type('Hello');
         cy.get('[data-cy="contact-input-name"]').type('John Doe');
         cy.get('[data-cy="contact-btn-submit"]').then((el) => {
@@ -21,7 +21,7 @@ describe('contact form', () => {
     });
 
     it('should validate the form input', () => {
-        cy.visit('http://localhost:5173/about');
+        cy.visit('/about');
         cy.get('[data-cy="contact-btn-submit"]').as('submitBtn'); 
         cy.get('@submitBtn').click();
         cy.get('@submitBtn').then(el => {

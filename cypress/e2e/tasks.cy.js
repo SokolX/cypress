@@ -2,7 +2,7 @@
 
 describe('tasks managment', () => {
     it('should open and close the new task modal by click background', () => {
-      cy.visit('http://localhost:5173');
+      cy.visit('/');
       cy.contains('Add Task').click();
       cy.get('.backdrop').click({ force: true });
       cy.get('.backdrop').should('not.exist');
@@ -10,7 +10,7 @@ describe('tasks managment', () => {
     });
 
     it('should open and close the new task modal by click button Cancel', () => {
-      cy.visit('http://localhost:5173');
+      cy.visit('/');
       cy.contains('Add Task').click();
       cy.get('.modal').should('exist');
       cy.contains('Cancel').click();
@@ -19,7 +19,7 @@ describe('tasks managment', () => {
     });
 
     it('should create a new task', () => {
-      cy.visit('http://localhost:5173');
+      cy.visit('/');
       cy.contains('Add Task').click();
       
       cy.get('#title').type('New Task');
@@ -32,7 +32,7 @@ describe('tasks managment', () => {
     });
 
     it('should validate user input', () => {
-      cy.visit('http://localhost:5173');
+      cy.visit('/');
       cy.contains('Add Task').click();
       
       cy.get('.modal').contains('Add Task').click();
@@ -40,7 +40,7 @@ describe('tasks managment', () => {
     });
 
     it('should filter tasks', () => {
-      cy.visit('http://localhost:5173');
+      cy.visit('/');
       cy.contains('Add Task').click();
       
       cy.get('#title').type('Urgent Task');
@@ -81,7 +81,7 @@ describe('tasks managment', () => {
     });
 
     it('should add multiple tasks', () => {
-      cy.visit('http://localhost:5173');
+      cy.visit('/');
       
       cy.contains('Add Task').click();
       cy.get('#title').type('Task 1');
