@@ -20,26 +20,25 @@ describe('contact form', () => {
     });
 
     it('should submit the form', () => {
-        
         cy.getById('contact-input-message').type('Hello');
-        cy.get('[data-cy="contact-input-name"]').type('John Doe');
-        cy.get('[data-cy="contact-btn-submit"]').then((el) => {
+        cy.getById('contact-input-name').type('John Doe');
+        cy.getById('contact-btn-submit').then((el) => {
             expect(el.attr('disabled')).to.be.undefined;
             expect(el.text()).to.eq('Send Message');
         });
-        cy.get('[data-cy="contact-input-email"]').type('test@example.com');
+        cy.getById('contact-input-email').type('test@example.com');
         cy.submitForm()
         //cy.get('[data-cy="contact-btn-submit"]')
         //    .contains('Send Message')
         //    .and('not.have.attr', 'disabled'); // and == should()
-        cy.get('[data-cy="contact-btn-submit"]').as('submitBtn'); //use alias, const not recommended
+        cy.getById('contact-btn-submit').as('submitBtn'); //use alias, const not recommended
         //cy.get('@submitBtn').click();
         cy.get('@submitBtn').contains('Sending...');
         cy.get('@submitBtn').should('have.attr', 'disabled');
     });
 
     it('should validate the form input', () => {
-        cy.get('[data-cy="contact-btn-submit"]').as('submitBtn'); 
+        cy.getById('contact-btn-submit').as('submitBtn'); 
         cy.submitForm();
         cy.get('@submitBtn').then(el => {
             expect(el).to.not.have.attr('disabled');
@@ -47,21 +46,21 @@ describe('contact form', () => {
         })
         cy.get('@submitBtn').contains('Send Message');
 
-        cy.get('[data-cy="contact-input-message"]').as('msgInput')
+        cy.getById('contact-input-message').as('msgInput')
         cy.get('@msgInput').blur(); //lose focus
         cy.get('@msgInput')
             .parent()
             .should('have.attr', 'class')
             .and('match', /invalid/); // or .and('eq', 'invalid')
 
-        cy.get('[data-cy="contact-input-name"]').as('nameInput')
+        cy.getById('contact-input-name').as('nameInput')
         cy.get('@nameInput').focus().blur(); //lose focus
         cy.get('@nameInput')
             .parent()
             .should('have.attr', 'class')
             .and('match', /invalid/); 
         
-        cy.get('[data-cy="contact-input-email"]').as('emailInput')
+        cy.getById('contact-input-email').as('emailInput')
         cy.get('@emailInput').focus().blur(); //lose focus
         cy.get('@emailInput')
             .parent()
