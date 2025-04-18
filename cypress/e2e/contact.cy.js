@@ -20,6 +20,9 @@ describe('contact form', () => {
     });
 
     it('should submit the form', () => {
+        cy.task('seedDatabase', 'filename.csv').then(returnValue => {
+            //use returnValue
+        });
         cy.getById('contact-input-message').type('Hello');
         cy.getById('contact-input-name').type('John Doe');
         cy.getById('contact-btn-submit').then((el) => {
