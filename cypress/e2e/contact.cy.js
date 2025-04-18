@@ -27,8 +27,8 @@ describe('contact form', () => {
             expect(el.attr('disabled')).to.be.undefined;
             expect(el.text()).to.eq('Send Message');
         });
-        cy.get('[data-cy="contact-input-email"]').type('test@example.com{enter}');
-
+        cy.get('[data-cy="contact-input-email"]').type('test@example.com');
+        cy.submitForm()
         //cy.get('[data-cy="contact-btn-submit"]')
         //    .contains('Send Message')
         //    .and('not.have.attr', 'disabled'); // and == should()
@@ -40,7 +40,7 @@ describe('contact form', () => {
 
     it('should validate the form input', () => {
         cy.get('[data-cy="contact-btn-submit"]').as('submitBtn'); 
-        cy.get('@submitBtn').click();
+        cy.submitForm();
         cy.get('@submitBtn').then(el => {
             expect(el).to.not.have.attr('disabled');
             expect(el.text()).to.not.equal('Sending...');
